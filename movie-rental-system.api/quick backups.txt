@@ -4,3 +4,5 @@ Server=(localdb)\\mssqllocaldb;Database=MovieRentalDB_IIS;Trusted_Connection=Tru
 
 //hosted db connection string
 Server=first-rds-instance.chpmjnhwliyq.ap-southeast-1.rds.amazonaws.com;Database=MovieRentalDB;User Id=admin;Password=wonderbar321;
+
+//for a dummy commit
