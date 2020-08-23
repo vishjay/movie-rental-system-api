@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using movie_rental_system.core.Data;
 using movie_rental_system.core.Services;
 
@@ -38,6 +41,30 @@ namespace movie_rental_system.api
             });
             services.AddCors();
             services.AddControllers();
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "1.0.0",
+                    Title = "movie-rental-system-api",
+                    Description = "Backend api for movie-rental-system with jwt authentication",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Isuru Jayathilake",
+                        Email = "vishjayathilake@gmail.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Open Source"
+                    }
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
             services.AddScoped<MoviesService>();
             services.AddScoped<CategoriesService>();
             services.AddScoped<AuthService>();
@@ -94,6 +121,15 @@ namespace movie_rental_system.api
             });
 
             app.UseHttpsRedirection();
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "movie-rental-system-api 1.0.0");
+            });
 
             app.UseRouting();
             app.UseAuthentication();

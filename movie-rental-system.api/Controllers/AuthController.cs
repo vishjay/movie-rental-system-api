@@ -14,6 +14,7 @@ using movie_rental_system.core.Services;
 
 namespace movie_rental_system.api.Controllers
 {
+    [Produces("application/json")]
     [Authorize]
     [Route("api")]
     public class AuthController : APIBaseController
@@ -24,7 +25,21 @@ namespace movie_rental_system.api.Controllers
             this.service = service;
         }
 
-
+        /// <summary>
+        /// Registers a user into the system
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /register
+        ///     {
+        ///        "FirstName": "Jake",
+        ///        "LastName": "Damian",
+        ///        "Email": "jakedamian@abc.com",
+        ///        "Password": "Password321"
+        ///     }
+        ///
+        /// </remarks>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserDTO_In userDTO)
@@ -33,6 +48,7 @@ namespace movie_rental_system.api.Controllers
             return Ok();
         }
 
+        
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate(AuthDTO_In authDTO)
