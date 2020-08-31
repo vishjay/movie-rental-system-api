@@ -32,6 +32,7 @@ namespace movie_rental_system.api.Controllers
             return CreatedAtAction(nameof(getMovie), new { id = movie.Id }, movie);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<List<MovieDTO_Out>> getMovies()
