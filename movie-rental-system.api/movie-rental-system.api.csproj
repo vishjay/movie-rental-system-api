@@ -28,9 +28,5 @@
     <ProjectReference Include="..\movie-rental-system.core\movie-rental-system.core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Publish\" />
-  </ItemGroup>
-
 
 </Project>
