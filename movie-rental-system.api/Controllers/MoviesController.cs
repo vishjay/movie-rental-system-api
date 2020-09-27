@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using movie_rental_system.api.Middleware;
 using movie_rental_system.core.Data;
 using movie_rental_system.core.DTOs;
 using movie_rental_system.core.Models;
@@ -14,6 +15,7 @@ using movie_rental_system.core.Services;
 namespace movie_rental_system.api.Controllers
 {
     [Authorize]
+    [ServiceFilter(typeof(APIExceptionFilter))]
     [Route("api/[controller]")]
     public class MoviesController : APIBaseController
     {
@@ -62,6 +64,11 @@ namespace movie_rental_system.api.Controllers
             return await this.service.findMovieAsync(searchTerm);
         }
 
+        [HttpGet("error-test")]
+        public void TestException()
+        {
+            throw new InvalidOperationException("This is an unhandled exception");
+        }
 
     }
 }

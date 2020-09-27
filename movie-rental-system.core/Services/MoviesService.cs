@@ -13,7 +13,7 @@ namespace movie_rental_system.core.Services
 {
     public class MoviesService
     {
-        protected readonly MovieRentalContext context;
+        private readonly MovieRentalContext context;
         public MoviesService(MovieRentalContext context)
         {
             this.context = context;

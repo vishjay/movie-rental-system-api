@@ -9,3 +9,7 @@ Server=first-rds-instance.chpmjnhwliyq.ap-southeast-1.rds.amazonaws.com;Database
 
 //
 isuruadminpass321
+//
+tryna connect to the sql serevr locally
+
+"Server=DESKTOP-O6076QB;Database=MovieRentalDB;Trusted_Connection=True;"

@@ -22,7 +22,7 @@ namespace movie_rental_system.api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //webBuilder.UseKestrel(options => { options.Listen(IPAddress.Any, port:80); });
+                    webBuilder.UseKestrel(options => { options.Listen(IPAddress.Any, port:5000); });
                     webBuilder.UseStartup<Startup>();
                 });
     }

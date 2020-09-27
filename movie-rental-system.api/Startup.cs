@@ -17,8 +17,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using movie_rental_system.api.Middleware;
 using movie_rental_system.core.Data;
 using movie_rental_system.core.Services;
+using movie_rental_system.core.UnitofWork;
 
 namespace movie_rental_system.api
 {
@@ -65,6 +67,8 @@ namespace movie_rental_system.api
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            services.AddScoped<IUnitofWork, UnitOfWork>();
+            services.AddScoped<APIExceptionFilter>();
             services.AddScoped<MoviesService>();
             services.AddScoped<CategoriesService>();
             services.AddScoped<AuthService>();
